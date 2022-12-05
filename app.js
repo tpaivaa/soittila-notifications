@@ -24,6 +24,10 @@ const app = express();
 // parse the updates to JSON
 app.use(express.json())
 
+app.get('/', (req,res) => {
+  res.send('Alive')
+})
+
 // We are receiving updates at the route below!
 app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body)
