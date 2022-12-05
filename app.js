@@ -47,9 +47,8 @@ app.get('/send', (req,res) => {
 })
 
 app.post('/send', (req,res) => {
-  { message } = req.body
+  const message = req.body.message
   if (message){
-    const message = req.body.message
     bot.sendMessage(CHAT_ID,message)
     console.log(`Chat_message: ${message}`)
     res.send(200)
