@@ -1,0 +1,15 @@
+[Unit]
+Description=Soittila notifications Telegram bot
+After=network.target
+
+
+[Service]
+Environment=NODE_PORT=3001
+Environment=TELEGRAM_TOKEN="bot token HERE!"
+Type=simple
+User="user on system here"
+ExecStart=/usr/bin/node /home/"user on system here"/app.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

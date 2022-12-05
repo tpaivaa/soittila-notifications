@@ -1,0 +1,24 @@
+# Install
+```
+clone the repo
+cd to repo
+npm i
+
+# Create dotenv file .env
+add below environment variables on the .env file
+```
+NODE_PORT=3001 # or you can set this on .service file
+TELEGRAM_TOKEN='Token received from botfather here'
+
+# Copy the systemd files and enable service
+```
+sudo cp systemd_examplefiles/* /lib/systemd/system/
+sudo vim  /lib/systemd/system/soittila-notifications.service # fill correct info based on your setup
+
+sudo systemctl enable soittila-notifications.service
+```
+# Check status of your service
+sudo systemctl status soittila-notifications.service
+
+# log systemd service
+> sudo journalctl -f -u soittila-notifications.service
