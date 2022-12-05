@@ -31,13 +31,8 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 })
 
 // Start Express Server
-var server = app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Express server is listening on ${port}`)
-  server.close(() => {
-    console.log(`closing...`)
-    var deleledwebhook = bot.deleteWebHook()
-    console.log(`Webhook deleted: ${deleledwebhook} `)
-  })
 })
 
 // Just to ping!
@@ -56,3 +51,15 @@ bot.on('webhook_error', (error) => {
   console.log(error.code)  // => 'EPARSE'
 })
 
+const gracefulShutdownHandler = async (signal) => {
+  console.log(`⚠️ Caught ${signal}, gracefully shutting down`)
+  const deletedwebhook = await bot.deleteWebHook()
+  console.log(`Webhook deleted: ${deletedwebhook} `)
+  server.close(() => {
+    debug('HTTP server closed')
+    process.exit()
+  })
+}
+
+process.on('SIGINT', gracefulShutdownHandler)
+process.on('SIGTERM', gracefulShutdownHandler)
