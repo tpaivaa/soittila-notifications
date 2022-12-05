@@ -9,7 +9,8 @@ console.log(`TELEGRAM_WEBHOOK: ${TELEGRAM_WEBHOOK}`)
 console.log(`CHAT_ID: ${CHAT_ID}`)
 
 const TelegramBot = require('node-telegram-bot-api')
-const express = require('express');
+const express = require('express')
+
 
 // No need to pass any parameters as we will handle the updates with Express
 const bot = new TelegramBot(TOKEN)
@@ -24,7 +25,7 @@ if (deletedWebhook) {
 else {
   console.log('Error deleting webhook!', deletedWebhook)
 }
-const app = express();
+const app = express()
 
 // parse the updates to JSON
 app.use(express.json())
@@ -43,8 +44,21 @@ app.get('/send', (req,res) => {
   else {
     res.send('Try again loser!')
   }
-
 })
+
+app.post('/send', (req,res) => {
+  { message } = req.body
+  if (message){
+    const message = req.body.message
+    bot.sendMessage(CHAT_ID,message)
+    console.log(`Chat_message: ${message}`)
+    res.send(200)
+  }
+  else {
+    res.send('Try again loser!')
+  }
+})
+
 
 // We are receiving updates at the route below!
 app.post(`/bot${TOKEN}`, (req, res) => {
@@ -65,9 +79,9 @@ bot.on('message', msg => {
     bot.sendMessage(msg.chat.id,"Pong")
     }
 
-    var bye = "bye";
+    const bye = "bye"
     if (msg.text.toString().toLowerCase().includes(bye)) {
-    bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye");
+    bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye")
     }
 })
 bot.on('webhook_error', (error) => {
