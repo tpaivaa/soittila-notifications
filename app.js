@@ -3,6 +3,9 @@ const TOKEN = process.env.TELEGRAM_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN'
 const port = process.env.NODE_PORT
 const TELEGRAM_WEBHOOK = process.env.TELEGRAM_WEBHOOK
 
+console.log(`TOKEN: ${TOKEN}`)
+console.log(`TELEGRAM_WEBHOOK: ${TELEGRAM_WEBHOOK}`)
+
 const TelegramBot = require('node-telegram-bot-api')
 const express = require('express');
 
