@@ -6,7 +6,7 @@ const CHAT_ID=process.env.CHAT_ID
 
 console.log(`TOKEN: ${TOKEN}`)
 console.log(`TELEGRAM_WEBHOOK: ${TELEGRAM_WEBHOOK}`)
-console.log(`TELEGRAM_WEBHOOK: ${CHAT_ID}`)
+console.log(`CHAT_ID: ${CHAT_ID}`)
 
 const TelegramBot = require('node-telegram-bot-api')
 const express = require('express');
@@ -58,7 +58,7 @@ const server = app.listen(port, () => {
 
 // Just to ping!
 bot.on('message', msg => {
-  console.log(`Message: ${msg}`)
+  console.dir(`Message: ${msg}`, { depth: null })
   const ping='ping'
   if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
     bot.sendMessage(msg.chat.id,"Pong")
