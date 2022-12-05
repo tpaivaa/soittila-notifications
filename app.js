@@ -58,7 +58,7 @@ const server = app.listen(port, () => {
 
 // Just to ping!
 bot.on('message', msg => {
-  console.dir(`Message: ${msg}`, { depth: null })
+  console.log(`Message: ${JSON.stringify(msg)}`)
   const ping='ping'
   if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
     bot.sendMessage(msg.chat.id,"Pong")
