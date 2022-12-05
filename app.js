@@ -2,6 +2,7 @@ require('dotenv').config()
 const TOKEN = process.env.TELEGRAM_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN'
 const port = process.env.NODE_PORT
 const TELEGRAM_WEBHOOK = process.env.TELEGRAM_WEBHOOK
+const CHAT_ID=process.env.CHAT_ID
 
 console.log(`TOKEN: ${TOKEN}`)
 console.log(`TELEGRAM_WEBHOOK: ${TELEGRAM_WEBHOOK}`)
@@ -31,6 +32,17 @@ app.get('/', (req,res) => {
   res.send('Alive')
 })
 
+app.get('/send', (req,res) => {
+  if (req.query.message){
+    const message = req.query.message
+    bot.sendMessage(CHAT_ID,message)
+  }
+  else {
+    res.send('Try again loser!')
+  }
+
+})
+
 // We are receiving updates at the route below!
 app.post(`/bot${TOKEN}`, (req, res) => {
   bot.processUpdate(req.body)
@@ -46,7 +58,7 @@ const server = app.listen(port, () => {
 bot.on('message', msg => {
   const ping='ping'
   if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
-    bot.sendMessage(msg.chat.id,"Pong");
+    bot.sendMessage(msg.chat.id,"Pong")
     }
 
     var bye = "bye";
