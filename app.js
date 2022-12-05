@@ -10,7 +10,7 @@ const express = require('express');
 const bot = new TelegramBot(TOKEN)
 
 //Delete previous webhook
-const deletedWebhook = bot.deleteWebhook()
+const deletedWebhook = bot.deleteWebHook()
 
 // This informs the Telegram servers of the new webhook.
 if (deletedWebhook) {
