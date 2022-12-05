@@ -56,7 +56,7 @@ const gracefulShutdownHandler = async (signal) => {
   const deletedwebhook = await bot.deleteWebHook()
   console.log(`Webhook deleted: ${deletedwebhook} `)
   server.close(() => {
-    debug('HTTP server closed')
+    console.log('HTTP server closed')
     process.exit()
   })
 }
