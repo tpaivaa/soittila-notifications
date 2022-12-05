@@ -38,6 +38,7 @@ app.get('/send', (req,res) => {
     const message = req.query.message
     bot.sendMessage(CHAT_ID,message)
     console.log(`Chat_message: ${message}`)
+    res.send(200)
   }
   else {
     res.send('Try again loser!')
