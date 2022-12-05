@@ -31,8 +31,13 @@ app.post(`/bot${TOKEN}`, (req, res) => {
 })
 
 // Start Express Server
-app.listen(port, () => {
+var server = app.listen(port, () => {
   console.log(`Express server is listening on ${port}`)
+  server.close(() => {
+    console.log(`closing...`)
+    var deleledwebhook = bot.deleteWebHook()
+    console.log(`Webhook deleted: ${deleledwebhook} `)
+  })
 })
 
 // Just to ping!
@@ -50,3 +55,4 @@ bot.on('message', msg => {
 bot.on('webhook_error', (error) => {
   console.log(error.code)  // => 'EPARSE'
 })
+
