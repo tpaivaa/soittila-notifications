@@ -1,7 +1,7 @@
 require('dotenv').config()
 const TOKEN = process.env.TELEGRAM_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN'
-const url = 'https://<PUBLIC-URL>'
-const port = process.env.PORT
+const port = process.env.NODE_PORT
+const TELEGRAM_WEBHOOK = process.env.TELEGRAM_WEBHOOK
 
 const TelegramBot = require('node-telegram-bot-api')
 const express = require('express');
@@ -10,7 +10,7 @@ const express = require('express');
 const bot = new TelegramBot(TOKEN)
 
 // This informs the Telegram servers of the new webhook.
-bot.setWebHook(`${url}/bot${TOKEN}`)
+bot.setWebHook(`${TELEGRAM_WEBHOOK}/bot${TOKEN}`)
 
 const app = express();
 
@@ -30,5 +30,16 @@ app.listen(port, () => {
 
 // Just to ping!
 bot.on('message', msg => {
-  bot.sendMessage(msg.chat.id, 'I am alive!')
+  const ping='ping'
+  if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
+    bot.sendMessage(msg.chat.id,"Pong");
+    }
+
+    var bye = "bye";
+    if (msg.text.toString().toLowerCase().includes(bye)) {
+    bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye");
+    }
+})
+bot.on('webhook_error', (error) => {
+  console.log(error.code);  // => 'EPARSE'
 })
