@@ -9,9 +9,16 @@ const express = require('express');
 // No need to pass any parameters as we will handle the updates with Express
 const bot = new TelegramBot(TOKEN)
 
-// This informs the Telegram servers of the new webhook.
-bot.setWebHook(`${TELEGRAM_WEBHOOK}/bot${TOKEN}`)
+//Delete previous webhook
+const deletedWebhook = bot.deleteWebhook()
 
+// This informs the Telegram servers of the new webhook.
+if (deletedWebhook) {
+  bot.setWebHook(`${TELEGRAM_WEBHOOK}/bot${TOKEN}`)
+}
+else {
+  console.log('Error deleting webhook!', deletedWebhook)
+}
 const app = express();
 
 // parse the updates to JSON
@@ -41,5 +48,5 @@ bot.on('message', msg => {
     }
 })
 bot.on('webhook_error', (error) => {
-  console.log(error.code);  // => 'EPARSE'
+  console.log(error.code)  // => 'EPARSE'
 })
