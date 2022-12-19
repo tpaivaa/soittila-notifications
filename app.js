@@ -21,9 +21,12 @@ const deletedWebhook = bot.deleteWebHook()
 // This informs the Telegram servers of the new webhook.
 if (deletedWebhook) {
   bot.setWebHook(`${TELEGRAM_WEBHOOK}/bot${TOKEN}`)
+  console.log('webhook now set')
 }
 else {
   console.log('Error deleting webhook!', deletedWebhook)
+  bot.setWebHook(`${TELEGRAM_WEBHOOK}/bot${TOKEN}`)
+  console.log('webhook now set')
 }
 const app = express()
 
@@ -78,10 +81,10 @@ bot.on('message', msg => {
     bot.sendMessage(msg.chat.id,"Pong")
     }
 
-    const bye = "bye"
-    if (msg.text.toString().toLowerCase().includes(bye)) {
-    bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye")
-    }
+  const bye = "bye"
+  if (msg.text.toString().toLowerCase().includes(bye)) {
+  bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye")
+  }
 })
 bot.on('webhook_error', (error) => {
   console.log(error.code)  // => 'EPARSE'
