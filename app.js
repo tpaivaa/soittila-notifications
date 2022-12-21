@@ -82,14 +82,13 @@ const server = app.listen(port, () => {
 bot.on('message', msg => {
   console.log(`Message: ${JSON.stringify(msg)}`)
   const ping='ping'
-  const pong='pong'
   if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
     bot.sendMessage(msg.chat.id,"Pong")
     }
+  const pong='pong'
   if (msg.text.toString().toLowerCase().indexOf(pong) === 0) {
     bot.sendMessage(msg.chat.id,"ping")
     }
-
   const bye = "bye"
   if (msg.text.toString().toLowerCase().includes(bye)) {
   bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye")
