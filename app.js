@@ -52,8 +52,8 @@ app.get('/send', (req,res) => {
 app.post('/send', (req,res) => {
   const message = req.body
   if (message){
-    bot.sendMessage(CHAT_ID,message)
-    console.log(`Chat_message: ${message}`)
+    bot.sendMessage(CHAT_ID,JSON.parse(message))
+    console.log(`Chat_message: ${JSON.parse(message)}`)
     res.send(200)
   }
   else {
