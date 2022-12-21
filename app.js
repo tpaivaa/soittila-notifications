@@ -95,9 +95,14 @@ bot.on('message', msg => {
   }
 })
 bot.on('webhook_error', (error) => {
+  console.log('polling_error')
   console.log(error.code)  // => 'EPARSE'
 })
 
+bot.on('polling_error', (error) => {
+  console.log('polling_error')
+  console.log(error.code)  // => 'EFATAL'
+})
 const gracefulShutdownHandler = async (signal) => {
   console.log(`⚠️ Caught ${signal}, gracefully shutting down`)
   const deletedwebhook = await bot.deleteWebHook()
