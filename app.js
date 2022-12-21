@@ -59,7 +59,7 @@ app.post('/send', (req,res) => {
   if (message){
     bot.sendMessage(CHAT_ID,message)
     console.log(`Chat_message: ${message}`)
-    res.send(200)
+    res.sendStatus(200)
   }
   else {
     res.send('Try again loser!')
@@ -82,8 +82,12 @@ const server = app.listen(port, () => {
 bot.on('message', msg => {
   console.log(`Message: ${JSON.stringify(msg)}`)
   const ping='ping'
+  const pong='pong'
   if (msg.text.toString().toLowerCase().indexOf(ping) === 0) {
     bot.sendMessage(msg.chat.id,"Pong")
+    }
+  if (msg.text.toString().toLowerCase().indexOf(pong) === 0) {
+    bot.sendMessage(msg.chat.id,"ping")
     }
 
   const bye = "bye"
