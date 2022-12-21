@@ -50,7 +50,8 @@ app.get('/send', (req,res) => {
 })
 
 app.post('/send', (req,res) => {
-  const message = JSON.parse(req.body)
+  const message = req.body
+  console.dir(message)
   if (message){
     bot.sendMessage(CHAT_ID,message)
     console.log(`Chat_message: ${JSON.parse(message)}`)
