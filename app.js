@@ -50,7 +50,7 @@ app.get('/send', (req,res) => {
 })
 
 app.post('/send', (req,res) => {
-  console.log(message)
+  console.log(req.body)
   const message = JSON.stringify(req.body)
   console.log(JSON.stringify(message))
 
