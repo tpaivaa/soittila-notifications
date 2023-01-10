@@ -13,7 +13,7 @@ const express = require('express')
 
 
 // No need to pass any parameters as we will handle the updates with Express
-const bot = new TelegramBot(TOKEN)
+const bot = new TelegramBot(TOKEN, {polling: true})
 
 //Delete previous webhook
 const deletedWebhook = bot.deleteWebHook()
@@ -92,6 +92,10 @@ bot.on('message', msg => {
   const bye = "bye"
   if (msg.text.toString().toLowerCase().includes(bye)) {
   bot.sendMessage(msg.chat.id, "Hope to see you around again , Bye")
+  }
+  const helo = "helo"
+  if (msg.text.toString().toLowerCase().includes(helo)) {
+  bot.sendMessage(msg.chat.id, "Still, alive")
   }
 })
 bot.on('webhook_error', (error) => {
